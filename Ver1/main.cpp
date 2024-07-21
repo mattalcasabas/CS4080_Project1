@@ -83,10 +83,18 @@ int main() {
     // get dims of first matrix from user
     cout << "Enter number of rows/columns for first matrix: ";
     cin >> r1 >> c1;
+    if (r1 > 100 || c1 > 100) {
+        cout << "Size of matrix must be less than 100x100." << endl;
+        return 1;
+    }
     
     // get dims of second matrix from user
     cout << "Enter number of rows/columns for second matrix: ";
     cin >> r2 >> c2;
+    if (r2 > 100 || c2 > 100) {
+        cout << "Size of matrix must be less than 100x100." << endl;
+        return 1;
+    }
 
     // check if dimensions work for addition and subtraction
     if (r1 != r2 || c1 != c2) {
