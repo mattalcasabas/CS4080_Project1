@@ -6,7 +6,7 @@
 using namespace std;
 
 // type alias for 2D vector of integers
-typedef vector<vector<int>> Matrix;
+typedef vector<vector<float>> Matrix;
 
 // input matrix elements from user
 void inputMatrix(Matrix &matrix, int rows, int cols) {
@@ -22,8 +22,8 @@ void inputMatrix(Matrix &matrix, int rows, int cols) {
 void randomizeMatrix(Matrix &matrix, int rows, int cols) {
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < rows; ++j) {
-            // create random numbers between 0 and 99
-            matrix[i][j] = rand() % 100; 
+            // create random floats between 0 and 99.99
+            matrix[i][j] = static_cast<float>(rand()) / RAND_MAX * 100.0f; 
         }
     }
 }
@@ -41,7 +41,7 @@ void printMatrix(const Matrix &matrix) {
 // add two matrices
 Matrix addMatrices(const Matrix &m1, const Matrix &m2, int rows, int cols) {
     // create a result matrix
-    Matrix result(rows, vector<int>(cols));
+    Matrix result(rows, vector<float>(cols));
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j) {
             result[i][j] = m1[i][j] + m2[i][j];
@@ -53,7 +53,7 @@ Matrix addMatrices(const Matrix &m1, const Matrix &m2, int rows, int cols) {
 // subtract two matrices
 Matrix subtractMatrices(const Matrix &m1, const Matrix &m2, int rows, int cols) {
     // create a result matrix
-    Matrix result(rows, vector<int>(cols));
+    Matrix result(rows, vector<float>(cols));
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j) {
             result[i][j] = m1[i][j] - m2[i][j];
@@ -64,7 +64,7 @@ Matrix subtractMatrices(const Matrix &m1, const Matrix &m2, int rows, int cols) 
 
 // multiply two matrices
 Matrix multiplyMatrices(const Matrix &m1, const Matrix &m2, int r1, int c1, int c2) {
-    Matrix result(r1, vector<int>(c2, 0));
+    Matrix result(r1, vector<float>(c2, 0));
     for (int i = 0; i < r1; ++i) {
         for (int j = 0; j < c2; ++j) {
             for (int k = 0; k < c1; ++k) {
@@ -95,8 +95,8 @@ int main() {
     }
 
     // init matrices with given dimensions
-    Matrix m1(r1, vector<int>(c1));
-    Matrix m2(r2, vector<int>(c2));
+    Matrix m1(r1, vector<float>(c1));
+    Matrix m2(r2, vector<float>(c2));
 
     // check if user wants to input their own numbers or generate random matrices
     cout << "Generate random matrices? (y/n): " << endl;

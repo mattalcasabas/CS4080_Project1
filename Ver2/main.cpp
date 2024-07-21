@@ -5,11 +5,11 @@
 
 using namespace std;
 
-// type alias for 2D vector of integers
-typedef vector<vector<int>> Matrix;
+// // type alias for 2D vector of integers
+// typedef vector<vector<int>> Matrix;
 
 // input matrix elements from user
-void inputMatrix(int **matrix, int rows, int cols) {
+void inputMatrix(float **matrix, int rows, int cols) {
     cout << "Enter matrix elements: " << endl;
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j) {
@@ -19,17 +19,17 @@ void inputMatrix(int **matrix, int rows, int cols) {
 }
 
 // generate random matrices
-void randomizeMatrix(int **matrix, int rows, int cols) {
+void randomizeMatrix(float **matrix, int rows, int cols) {
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < rows; ++j) {
-            // create random numbers between 0 and 99
-            matrix[i][j] = rand() % 100; 
+            // create random floats between 0 and 99.99
+            matrix[i][j] = static_cast<float>(rand()) / RAND_MAX * 100.0f; 
         }
     }
 }
 
 // print matrix elements
-void printMatrix(int **matrix, int rows, int cols) {
+void printMatrix(float **matrix, int rows, int cols) {
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j) {
             cout << matrix[i][j] << " ";
@@ -39,16 +39,16 @@ void printMatrix(int **matrix, int rows, int cols) {
 }
 
 // create a matrix
-int** createMatrix(int rows, int cols) {
-    int** matrix = new int*[rows];
+float** createMatrix(int rows, int cols) {
+    float** matrix = new float*[rows];
     for (int i = 0; i < rows; ++i) {
-        matrix[i] = new int[cols];
+        matrix[i] = new float[cols];
     }
     return matrix;
 }
 
 // delete a matrix
-void deleteMatrix(int **matrix, int rows) {
+void deleteMatrix(float **matrix, int rows) {
     for (int i = 0; i < rows; ++i) {
         delete[] matrix[i];
     }
@@ -56,9 +56,9 @@ void deleteMatrix(int **matrix, int rows) {
 }
 
 // add two matrices
-int** addMatrices(int **m1, int **m2, int rows, int cols) {
+float** addMatrices(float **m1, float **m2, int rows, int cols) {
     // create a result matrix
-    int **result = createMatrix(rows, cols);
+    float **result = createMatrix(rows, cols);
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j) {
             result[i][j] = m1[i][j] + m2[i][j];
@@ -68,9 +68,9 @@ int** addMatrices(int **m1, int **m2, int rows, int cols) {
 }
 
 // subtract two matrices
-int** subtractMatrices(int **m1, int **m2, int rows, int cols) {
+float** subtractMatrices(float **m1, float **m2, int rows, int cols) {
     // create a result matrix
-    int **result = createMatrix(rows, cols);
+    float **result = createMatrix(rows, cols);
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j) {
             result[i][j] = m1[i][j] - m2[i][j];
@@ -80,8 +80,8 @@ int** subtractMatrices(int **m1, int **m2, int rows, int cols) {
 }
 
 // multiply two matrices
-int** multiplyMatrices(int **m1, int **m2, int r1, int c1, int c2) {
-    int **result = createMatrix(r1, c2);
+float** multiplyMatrices(float **m1, float **m2, int r1, int c1, int c2) {
+    float **result = createMatrix(r1, c2);
     for (int i = 0; i < r1; ++i) {
         for (int j = 0; j < c2; ++j) {
             for (int k = 0; k < c1; ++k) {
@@ -112,8 +112,8 @@ int main() {
     }
 
     // init matrices with given dimensions
-    int **m1 = createMatrix(r1, c1);
-    int **m2 = createMatrix(r2, c2);
+    float **m1 = createMatrix(r1, c1);
+    float **m2 = createMatrix(r2, c2);
 
     // check if user wants to input their own numbers or generate random matrices
     cout << "Generate random matrices? (y/n): " << endl;
@@ -147,13 +147,13 @@ int main() {
 
     // do matrix addition
     cout << "Addition:" << endl;
-    int **addResult = addMatrices(m1, m2, r1, c1);
+    float **addResult = addMatrices(m1, m2, r1, c1);
     printMatrix(addResult, r1, c1);
     deleteMatrix(addResult, r1);
 
     // do matrix subtraction
     cout << "Subtraction:" << endl;
-    int **subResult = subtractMatrices(m1, m2, r1, c1);
+    float **subResult = subtractMatrices(m1, m2, r1, c1);
     printMatrix(subResult, r1, c1);
     deleteMatrix(subResult, r1);
 
@@ -165,7 +165,7 @@ int main() {
 
     // do matrix multiplication
     cout << "Multiplication:" << endl;
-    int **multResult = multiplyMatrices(m1, m2, r1, c1, c2);
+    float **multResult = multiplyMatrices(m1, m2, r1, c1, c2);
     printMatrix(multResult, r1, c2);
     deleteMatrix(multResult, r1);
 
